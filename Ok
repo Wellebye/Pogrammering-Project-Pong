@@ -4,33 +4,58 @@ import random
 
 pygame.init()
 screen=pygame.display.set_mode((1200,750))
+
+FPS = 30
+
 pygame.display.set_caption("Ping pong")
 background = pygame.image.load('space.png')
 
-Ballimg=pygame.image.load('freddy.png')
-def ball (X,Y):
-    screen.blit(Ballimg,(X,Y))
-ballX = 600
-BallY = 375
+Ballimg = pygame.image.load('Spaceship.png')
+Ballimg = pygame.transform.scale(Ballimg, (48, 48))
+ballY = 375
+ballX = 375
+ballX_change = 0
 
 
-wall=pygame.image.load('fnuf.png')
+wallimg=pygame.image.load('Wall.png')
+wallX = 50
+wallY = 300
+wallX_change = 0
+wallY_change = 0
 
+def wall (X,Y):
+    screen.blit(wallimg, (X,Y))
 
 running=True
 while running:
-
+    #Meow Meow
     screen.fill((0, 0, 0))
     screen.blit(background,(0,0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-pygame.display.set_caption('ping pong')
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LSHIFT:
+             wallY_change = -1
+        if event.key == pygame.K_LCTRL:
+             wallY_change = 1
+    if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LCTRL or event.key == pygame.K_LSHIFT:
+               wallY_change = 0
+    wallY += wallY_change
+
+    if wallY <= 0:
+         wallY = 0
+
+    if wallY >= 700:
+         wallY = 700
+
+    
+    ball(ballX,ballY)
+    wall(wallX,wallY)
+    pygame.display.update()
 
 
-
-
-ball(ballX,BallY)
 
 
 
