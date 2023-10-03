@@ -26,6 +26,9 @@ wallY_change = 0
 def wall (X,Y):
     screen.blit(wallimg, (X,Y))
 
+def ball (X,Y):
+    screen.blit(Ballimg, (X,Y))
+
 running=True
 while running:
     #Meow Meow
