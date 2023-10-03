@@ -5,7 +5,7 @@ import random
 pygame.init()
 screen=pygame.display.set_mode((1200,750))
 pygame.display.set_caption("Ping pong")
-background = pygame.image.load('sus.png')
+background = pygame.image.load('space.png')
 
 Ballimg=pygame.image.load('freddy.png')
 def ball (X,Y):
@@ -21,6 +21,7 @@ running=True
 while running:
 
     screen.fill((0, 0, 0))
+    screen.blit(background,(0,0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
