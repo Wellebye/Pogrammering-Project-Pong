@@ -1,0 +1,35 @@
+import pygame
+import random
+
+
+pygame.init()
+screen=pygame.display.set_mode((1200,750))
+pygame.display.set_caption("Ping pong")
+background = pygame.image.load('sus.png')
+
+Ballimg=pygame.image.load('freddy.png')
+def ball (X,Y):
+    screen.blit(Ballimg,(X,Y))
+ballX = 600
+BallY = 375
+
+
+wall=pygame.image.load('fnuf.png')
+
+
+running=True
+while running:
+
+    screen.fill((0, 0, 0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+pygame.display.set_caption('ping pong')
+
+
+
+
+ball(ballX,BallY)
+
+
+
