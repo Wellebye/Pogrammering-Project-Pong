@@ -8,7 +8,6 @@ screen=pygame.display.set_mode((1200,750))
 
 FPS = 30
 
-over_font = pygame.font.Font('freesanbold.ttf',64)
 
 pygame.display.set_caption("Ping pong")
 background = pygame.image.load('space.png')
@@ -72,8 +71,7 @@ while running:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                wall2Y_change = 0
 
-  if ballX > 1:
-    game_over_text()
+
     
 
 
