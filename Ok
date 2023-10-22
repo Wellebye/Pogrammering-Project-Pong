@@ -1,5 +1,6 @@
 import pygame
 import random
+import math
 
 
 pygame.init()
@@ -10,11 +11,12 @@ FPS = 30
 pygame.display.set_caption("Ping pong")
 background = pygame.image.load('space.png')
 
-Ballimg = pygame.image.load('Spaceship.png')
-Ballimg = pygame.transform.scale(Ballimg, (48, 48))
+ballimg = pygame.image.load('Spaceship.png')
+ballimg = pygame.transform.scale(ballimg, (48, 48))
 ballY = 375
 ballX = 375
-ballX_change = 0
+ballX_change = 0.5
+ballY_change = 0.5
 
 
 wallimg=pygame.image.load('Wall.png')
@@ -23,11 +25,26 @@ wallY = 300
 wallX_change = 0
 wallY_change = 0
 
+wall2X = 1100
+wall2Y = 300
+wall2X_change = 0
+wall2Y_change = 0
+
 def wall (X,Y):
     screen.blit(wallimg, (X,Y))
 
-def ball (X,Y):
-    screen.blit(Ballimg, (X,Y))
+def wall2 (X,Y):
+     screen.blit(wallimg,(X,Y))
+
+def ball (x,y):
+    screen.blit(ballimg, (x,y))
+
+def iscollision(ballX,ballY,wallX,wallY):
+     distance = math.sqrt(math.pow(ballX-wallX, 2)+ (math.pow(ballY-wallY, 2)))
+     if distance < 1000:
+          return True
+     else:
+          return False
 
 running=True
 while running:
@@ -45,17 +62,55 @@ while running:
     if event.type == pygame.KEYUP:
             if event.key == pygame.K_LCTRL or event.key == pygame.K_LSHIFT:
                wallY_change = 0
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_UP:
+             wall2Y_change = -1
+        if event.key == pygame.K_DOWN:
+             wall2Y_change = 1
+    if event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+               wall2Y_change = 0
+
     wallY += wallY_change
 
     if wallY <= 0:
          wallY = 0
 
-    if wallY >= 700:
+    elif wallY >= 700:
          wallY = 700
+    
+    wall2Y += wall2Y_change
+
+    if wall2Y <= 0:
+         wall2Y = 0
+    
+    elif wall2Y >= 700:
+         wall2Y = 700
+
+
+    ballY += ballY_change
+
+    if ballY <= 0:
+         ballY_change = 0.5
+    elif ballY >= 750:
+         ballY_change = -0.5
+
+    ballX += ballX_change
+
+    if ballX <= -20:
+         ballX_change = 0.5
+    elif ballX >= 1175:
+         ballX_change = -0.5
+
+    collision = iscollision(ballX,ballY,wallX,wallY)
+    if collision:
+         ballXchange = 100.5
+         
 
     
     ball(ballX,ballY)
     wall(wallX,wallY)
+    wall2(wall2X,wall2Y)
     pygame.display.update()
 
 
