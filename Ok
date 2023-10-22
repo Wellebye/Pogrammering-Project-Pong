@@ -8,6 +8,8 @@ screen=pygame.display.set_mode((1200,750))
 
 FPS = 30
 
+over_font = pygame.font.Font('freesanbold.ttf',64)
+
 pygame.display.set_caption("Ping pong")
 background = pygame.image.load('space.png')
 
@@ -15,8 +17,8 @@ ballimg = pygame.image.load('Spaceship.png')
 ballimg = pygame.transform.scale(ballimg, (48, 48))
 ballY = 375
 ballX = 375
-ballX_change = 0.5
-ballY_change = 0.5
+ballX_change = 0.25
+ballY_change = 0.25
 
 
 wallimg=pygame.image.load('Wall.png')
@@ -39,12 +41,11 @@ def wall2 (X,Y):
 def ball (x,y):
     screen.blit(ballimg, (x,y))
 
-def iscollision(ballX,ballY,wallX,wallY):
-     distance = math.sqrt(math.pow(ballX-wallX, 2)+ (math.pow(ballY-wallY, 2)))
-     if distance < 1000:
-          return True
-     else:
-          return False
+def game_over_text():
+     over_text = over_font.render("Game Over", True, (255,255,255))
+     screen.blit(over_text,(200,500))
+
+
 
 running=True
 while running:
@@ -71,6 +72,11 @@ while running:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                wall2Y_change = 0
 
+  if ballX > 1:
+    game_over_text()
+    
+
+
     wallY += wallY_change
 
     if wallY <= 0:
@@ -91,22 +97,29 @@ while running:
     ballY += ballY_change
 
     if ballY <= 0:
-         ballY_change = 0.5
+         ballY_change = 0.25
     elif ballY >= 750:
-         ballY_change = -0.5
+         ballY_change = -0.25
 
     ballX += ballX_change
 
     if ballX <= -20:
-         ballX_change = 0.5
+         ballX_change = 0.25
     elif ballX >= 1175:
-         ballX_change = -0.5
+         ballX_change = -0.25
 
-    collision = iscollision(ballX,ballY,wallX,wallY)
-    if collision:
-         ballXchange = 100.5
-         
+    if ballX <= wallX:
+         if ballY <= wallY:
+              ballX = wallX
+              ballX_change *= -1
 
+    if wall2X <= ballX <= wall2X + 3:
+         if wall2Y <= ballY <= wall2Y + 45:
+              ballX = wall2X
+              ballX_change *=-1
+    
+    
+     
     
     ball(ballX,ballY)
     wall(wallX,wallY)
