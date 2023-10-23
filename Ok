@@ -40,9 +40,6 @@ def wall2 (X,Y):
 def ball (x,y):
     screen.blit(ballimg, (x,y))
 
-def game_over_text():
-     over_text = over_font.render("Game Over", True, (255,255,255))
-     screen.blit(over_text,(200,500))
 
 
 
@@ -97,7 +94,7 @@ while running:
     if ballY <= 0:
          ballY_change = 0.25
     elif ballY >= 750:
-         ballY_change = -0.25
+         ballY_change = -7
 
     ballX += ballX_change
 
@@ -110,11 +107,11 @@ while running:
          if ballY <= wallY:
               ballX = wallX
               ballX_change *= -1
-
+  
     if wall2X <= ballX <= wall2X + 3:
-         if wall2Y <= ballY <= wall2Y + 45:
-              ballX = wall2X
-              ballX_change *=-1
+        if wall2Y <= ballY <= wall2Y + 45:
+           ballX = wall2X
+           ballX_change *= -1
     
     
      
