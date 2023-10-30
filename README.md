@@ -140,4 +140,9 @@ for event in pygame.event.get():
 			if event.key == pygame.K_s:
 				opponent.movement -= opponent.speed
 
-    ![image](https://github.com/Wellebye/Pogrammering-Project-Pong/assets/146086850/edebb9db-f675-490b-888b-a58862e0e01e)
+# Flowchart
+Please check Flowchart.png
+
+# Udviklingsprocess
+Vi startede med at lave selve skærmen samt indsætte pygame. Dette gjorde vi af den simple grund af at det er nemmere at arbejde med noget som man kan se.
+Her
