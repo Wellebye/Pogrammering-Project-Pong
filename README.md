@@ -145,4 +145,10 @@ Please check Flowchart.png
 
 # Udviklingsprocess
 Vi startede med at lave selve skærmen samt indsætte pygame. Dette gjorde vi af den simple grund af at det er nemmere at arbejde med noget som man kan se.
-Her
+Herefter valgte vi at implementere baggrunden, samt de 3 vigtigste komponenter: 2 Vægge og 1 bold.
+Når det var gjort og væggene og bolden stod ordenligt valgte vi at fokusere på boldens bevægelse rundt. Det gjorde vi ved konstant at ændre dens x og y koordinat og gange den med -1 når den ramte vægge. For at kunne få den til at skifte retning blev vi dog nød til at lave boundries så bolden ikke bare forsvandt. Når boundries var lavet satte vi også bolden til at bevæge retning når den ramte disse boundries.
+Når alt det var gjort havde vi 2 vægge, en baggrund og en bold der bare farede rundt inde på skærmen. Herfra fokuserede vi på væggenes bevægelse. Dette gjorde vi ved at ændre deres Y koordinat når du trykker på W,S, UP og DOWN. Herefter skulle vi igen implementere boundries så væggene heller ikke kunne flygte væk fra skærmen.
+Når alt kunne bevæge sig og ikke ud fra skærmen lavede vi collision mellem bold og væg, så når bolden ramte væggen ville den også *= -1 ligesom med murene af skærmen. Herfra blev vi nødt til på x aksen at detektere når bolden kom udenfor skærmens pixels eller lig med skærmens pixels. Hermed hvis bolden nåede boldX >= 0 eller boldX =< 1250. Hvis den gjorde det ville vi skulle reset bolden tilbage til startpunkt. Udover det ville reset også fungere som pointtæller. Når den resat bolden fandt vi ud af om bolden var over 1250 eller under 0 og gav modstander siden 1 point som vi holdte styr på via en tæller. 
+Nu havde vi det meste af spillet bortset fra countdownen i starten, hvilket var det sidste vi lavede. timeren gjorde boldens X- og YChange inaktiv i de første 3 sekunder af spillet, derefter blev de igen aktive og bolden ville bevæge sig igen.
+
+Uheldigvis kan vi ikke finde ud af hvor de gamle commits er blevet af. 
