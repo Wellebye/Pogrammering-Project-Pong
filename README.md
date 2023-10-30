@@ -19,18 +19,20 @@ background = pygame.image.load('space.png')
 screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption('Pong')
 
-.
+
 
 Koden udputter hvilken retning som bolden vil flyve ved starten af spillet. Ved brug af random -1,1 ganget med boldens speed (selv.speed.y/x) vil dens hastighed enten være negativ eller positiv, hvilket vil ændre hvilken retning bolden vil bevæge sig.
+
 class Ball(Block):
 	def __init__(self,path,x_pos,y_pos,speed_x,speed_y,paddles):
 		super().__init__(path,x_pos,y_pos)
 		self.speed_x = speed_x * random.choice((-1,1))
 		self.speed_y = speed_y * random.choice((-1,1))
 
-.
+
 
 Hvis bolden er i bevægelse i y og x værdi eller har collision vil bolden fortsat bevæge sig. Hvis ikke, vil bolden genstarte og sættest tilbage til startposition.
+
   def update(self):
 		if self.active:
 			self.rect.x += self.speed_x
@@ -38,3 +40,49 @@ Hvis bolden er i bevægelse i y og x værdi eller har collision vil bolden forts
 			self.collisions()
 		else:
 			self.restart_counter()
+
+Hvis bolden kommer i kontakt med hvilken som helst del af paddles/væggene vil deres nuværende x og y hastighedsværdi ganges med -1, hvilket ændrer deres retning uanset den forrige hastighed
+
+if pygame.sprite.spritecollide(self,self.paddles,False):
+			pygame.mixer.Sound.play(plob_sound)
+			collision_paddle = pygame.sprite.spritecollide(self,self.paddles,False)[0].rect
+			if abs(self.rect.right - collision_paddle.left) < 10 and self.speed_x > 0:
+				self.speed_x *= -1
+			if abs(self.rect.left - collision_paddle.right) < 10 and self.speed_x < 0:
+				self.speed_x *= -1
+			if abs(self.rect.top - collision_paddle.bottom) < 10 and self.speed_y < 0:
+				self.rect.top = collision_paddle.bottom
+				self.speed_y *= -1
+			if abs(self.rect.bottom - collision_paddle.top) < 10 and self.speed_y > 0:
+				self.rect.bottom = collision_paddle.top
+				self.speed_y *= -1
+
+Hvis bolden er blevet reset vil den blive sendt enten op eller ned, venstre eller højre ligesom i starten. Derudover vil den også spille en pointlyd uanset hvem der fik pointet
+
+def reset_ball(self):
+		self.active = False
+		self.speed_x *= random.choice((-1,1))
+		self.speed_y *= random.choice((-1,1))
+		self.score_time = pygame.time.get_ticks()
+		self.rect.center = (screen_width/2,screen_height/2)
+		pygame.mixer.Sound.play(score_sound)
+
+hej
+
+def restart_counter(self):
+		current_time = pygame.time.get_ticks()
+		countdown_number = 3
+
+		if current_time - self.score_time <= 700:
+			countdown_number = 3
+		if 700 < current_time - self.score_time <= 1400:
+			countdown_number = 2
+		if 1400 < current_time - self.score_time <= 2100:
+			countdown_number = 1
+		if current_time - self.score_time >= 2100:
+			self.active = True
+
+		time_counter = basic_font.render(str(countdown_number),True,accent_color)
+		time_counter_rect = time_counter.get_rect(center = (screen_width/2,screen_height/2 + 50))
+		pygame.draw.rect(screen,bg_color,time_counter_rect)
+		screen.blit(time_counter,time_counter_rect)
