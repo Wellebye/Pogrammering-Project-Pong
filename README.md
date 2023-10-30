@@ -2,7 +2,8 @@
 
 Navn: Daniel Berg Pedersen 2.P, William Egelund Ellebye 2.P
 Programmeringssprog: Python
-Antal tegn:
+Udviklingsmiljø: Skole og hjemmearbejde
+Antal tegn: 8984
 
 Spillet er det simple spil pong. Målet er at man skal være to spillere der kæmper mod hinanden om at blokere bolden der kommer mod en. Hvis man ikke sender bolden tilbage og bolden rammer kanten på ens egen side, vil modstanderen få et point.
 Skærmlayoutet har bredere x koordinat på 1250 og en y koordinat på 800. For at bevæge væggene på hver side kan man bruge W,S for at gå op og ned med væggen på venstre side. Piletasterne op og ned gør det samme for væggen på højre side. Hvis væggene kommer i kontakt med den flyvende bold bliver den sendt i den modsatte retning, tilbage til modstanderen. 
@@ -82,11 +83,6 @@ if 1400 < current_time - self.score_time <= 2100:
 if current_time - self.score_time >= 2100:
 			self.active = True
 
-time_counter = basic_font.render(str(countdown_number),True,accent_color)
-		time_counter_rect = time_counter.get_rect(center = (screen_width/2,screen_height/2 + 50))
-		pygame.draw.rect(screen,bg_color,time_counter_rect)
-		screen.blit(time_counter,time_counter_rect)
-
 Player og opponent score starter på variablen 0. Når ball bliver reset kigger koden på hvilken side bolden blev reset på. Hvis den blev reset på højre side vil modstanderen få +1 point. Hvis det modsatte sker vil den anden spillers score gå op med en. 
 
 self.player_score = 0
@@ -151,4 +147,4 @@ Når alt det var gjort havde vi 2 vægge, en baggrund og en bold der bare farede
 Når alt kunne bevæge sig og ikke ud fra skærmen lavede vi collision mellem bold og væg, så når bolden ramte væggen ville den også *= -1 ligesom med murene af skærmen. Herfra blev vi nødt til på x aksen at detektere når bolden kom udenfor skærmens pixels eller lig med skærmens pixels. Hermed hvis bolden nåede boldX >= 0 eller boldX =< 1250. Hvis den gjorde det ville vi skulle reset bolden tilbage til startpunkt. Udover det ville reset også fungere som pointtæller. Når den resat bolden fandt vi ud af om bolden var over 1250 eller under 0 og gav modstander siden 1 point som vi holdte styr på via en tæller. 
 Nu havde vi det meste af spillet bortset fra countdownen i starten, hvilket var det sidste vi lavede. timeren gjorde boldens X- og YChange inaktiv i de første 3 sekunder af spillet, derefter blev de igen aktive og bolden ville bevæge sig igen.
 
-Uheldigvis kan vi ikke finde ud af hvor de gamle commits er blevet af. 
+Uheldigvis kan vi ikke finde ud af hvor de gamle commits er blevet af. Branchen: færdig spil (som ikke var det færdige spil) har en fil navngivet ok som har en tidlig version af koden, men er det eneste af den kode vi har tilbage
