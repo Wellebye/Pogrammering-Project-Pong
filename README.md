@@ -67,22 +67,77 @@ def reset_ball(self):
 		self.rect.center = (screen_width/2,screen_height/2)
 		pygame.mixer.Sound.play(score_sound)
 
-hej
+Når bolden er reset bliver tiden også reset som kan ses i forrige kode. Herfra opdatere koden bare indtil at current time + self.score er over 2100. Når den er det vil self.active være true, hvilket betyder at self.speed_x/y også er true, dermed bevæger bolden sig igen.
 
 def restart_counter(self):
 		current_time = pygame.time.get_ticks()
 		countdown_number = 3
 
-		if current_time - self.score_time <= 700:
+if current_time - self.score_time <= 700:
 			countdown_number = 3
-		if 700 < current_time - self.score_time <= 1400:
+if 700 < current_time - self.score_time <= 1400:
 			countdown_number = 2
-		if 1400 < current_time - self.score_time <= 2100:
+if 1400 < current_time - self.score_time <= 2100:
 			countdown_number = 1
-		if current_time - self.score_time >= 2100:
+if current_time - self.score_time >= 2100:
 			self.active = True
 
-		time_counter = basic_font.render(str(countdown_number),True,accent_color)
+time_counter = basic_font.render(str(countdown_number),True,accent_color)
 		time_counter_rect = time_counter.get_rect(center = (screen_width/2,screen_height/2 + 50))
 		pygame.draw.rect(screen,bg_color,time_counter_rect)
 		screen.blit(time_counter,time_counter_rect)
+
+Player og opponent score starter på variablen 0. Når ball bliver reset kigger koden på hvilken side bolden blev reset på. Hvis den blev reset på højre side vil modstanderen få +1 point. Hvis det modsatte sker vil den anden spillers score gå op med en. 
+
+self.player_score = 0
+self.opponent_score = 0
+def reset_ball(self):
+		if self.ball_group.sprite.rect.right >= screen_width:
+			self.opponent_score += 1
+			self.ball_group.sprite.reset_ball()
+		if self.ball_group.sprite.rect.left <= 0:
+			self.player_score += 1
+			self.ball_group.sprite.reset_ball()
+
+Kode for font, størrelse, farve, position for scorerne indenfor spillet. 
+
+def draw_score(self):
+		player_score = basic_font.render(str(self.player_score),True,accent_color)
+		opponent_score = basic_font.render(str(self.opponent_score),True,accent_color)
+
+player_score_rect = player_score.get_rect(midleft = (screen_width / 2 + 40,screen_height/2))
+		opponent_score_rect = opponent_score.get_rect(midright = (screen_width / 2 - 40,screen_height/2))
+
+screen.blit(player_score,player_score_rect)
+		screen.blit(opponent_score,opponent_score_rect)
+
+
+Hvis der trykkes på knapper, så vil der ske noget.
+Hvis der trykkes på quit knappen vil systemet lukke. Derfor bliver der importet sys i starten af spillet. 
+Hvis der trykkes KEYDOWN på UP, w så vil væggen bevæge sig opad så længe knappen er holdt. Hvis DOWN, s bliver holdt nede vil væggene bevæge sig ned af
+Event.type KEYUP sørger for at væggenes Y koordinater ikke ændrer sig når der gives slip på knapperne.
+
+for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			pygame.quit()
+			sys.exit()
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_UP:
+				player.movement -= player.speed
+			if event.key == pygame.K_w:
+				opponent.movement -= opponent.speed
+			if event.key == pygame.K_DOWN:
+				player.movement += player.speed
+			if event.key == pygame.K_s:
+				opponent.movement += opponent.speed
+		if event.type == pygame.KEYUP:
+			if event.key == pygame.K_UP:
+				player.movement += player.speed
+			if event.key == pygame.K_w:
+				opponent.movement += opponent.speed
+			if event.key == pygame.K_DOWN:
+				player.movement -= player.speed
+			if event.key == pygame.K_s:
+				opponent.movement -= opponent.speed
+
+    ![image](https://github.com/Wellebye/Pogrammering-Project-Pong/assets/146086850/edebb9db-f675-490b-888b-a58862e0e01e)
