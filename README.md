@@ -19,7 +19,7 @@ background = pygame.image.load('space.png')
 screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption('Pong')
 
-
+.
 
 Koden udputter hvilken retning som bolden vil flyve ved starten af spillet. Ved brug af random -1,1 ganget med boldens speed (selv.speed.y/x) vil dens hastighed enten være negativ eller positiv, hvilket vil ændre hvilken retning bolden vil bevæge sig.
 class Ball(Block):
@@ -28,7 +28,7 @@ class Ball(Block):
 		self.speed_x = speed_x * random.choice((-1,1))
 		self.speed_y = speed_y * random.choice((-1,1))
 
-
+.
 
 Hvis bolden er i bevægelse i y og x værdi eller har collision vil bolden fortsat bevæge sig. Hvis ikke, vil bolden genstarte og sættest tilbage til startposition.
   def update(self):
