@@ -2,7 +2,7 @@
 
 Navn: Daniel Berg Pedersen 2.P, William Egelund Ellebye 2.P
 Programmeringssprog: Python
-Udviklingsmiljø: Skole og hjemmearbejde
+Udviklingsmiljø: Visual studio code
 Antal tegn: 8984
 
 Spillet er det simple spil pong. Målet er at man skal være to spillere der kæmper mod hinanden om at blokere bolden der kommer mod en. Hvis man ikke sender bolden tilbage og bolden rammer kanten på ens egen side, vil modstanderen få et point.
