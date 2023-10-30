@@ -1,3 +1,5 @@
+# basis
+
 Navn: Daniel Berg Pedersen 2.P, William Egelund Ellebye 2.P
 Programmeringssprog: Python
 Antal tegn:
@@ -7,10 +9,10 @@ Skærmlayoutet har bredere x koordinat på 1250 og en y koordinat på 800. For a
 
 Spillet handler om bolden og de to vægge. Når spillet startes går der 3 sekunder inden bolden bevæger sig enten til venstre eller højre, op eller nedad. Herfra vil bolden fortsætte med at ændre y og x værdi indtil den rammer toppen eller bunden af skærmen. Hvis den rammer toppen eller bunden vil bolden gå i modsat retning. Væggene har samme effekt bortset fra at de styres af spillerne. Hvis bolden rammer en væg vil x værdien af bolden ændres og flyve modsatte vej. Hvis bolden kommer i kontakt med de ydre vægge mod venstre og højre vil den ikke ændre x værdi, men spillet vil detektere at der er kontakt og bolden vil blive flyttet tilbage til starter positionen og den modsatte sides spiller vil få deres tidligere pointværdi + 1. 
 
-
+# kode
 
 Kodeblok for selve spillet. Screenwidth (X) er sat til 1250 pixels og screenheight(Y) er sat til 800 pixels. Background har loadet png image space.png som ændrer baggrunden af spillet. Pygame.display laver variablen screen sammen med screenwidth og screenheight værdierne. Pygame.setcaption er til spillets caption som er pong.
-# Main Window 
+
 screen_width = 1250
 screen_height = 800
 background = pygame.image.load('space.png')
